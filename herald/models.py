@@ -15,7 +15,6 @@ class Author(models.Model):
 # user1 = User.objects.create_user('a5', 'lennon@thebeatles.com', 'a')
 # user1.save()
 
-
 class Article(models.Model):
 	article_text = models.CharField(max_length=200)
 	title_text = models.CharField(max_length=50)
