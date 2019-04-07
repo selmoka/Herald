@@ -6,9 +6,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fnews.settings')
 import django
 django.setup()
 
-from herald.models import Article, User, Author, Comment
+from herald.models import Article, Comment, Author, Visitor
 from faker import Faker
-
+from django.contrib.auth.models import User
 
 # article_text = models.CharField(max_length=200)
 # 	title_text = models.CharField(max_length=50)
@@ -26,24 +26,31 @@ if __name__ == '__main__':
 	print('Finished populating!')
 	fake = Faker()
 	for _ in range(1,50):
-		name_author = fake.name()
-		t = Author(name=name_author)
-		t.save()
+		username = fake.first_name()
+		password = fake.password()
+		bio = fake.text()
+		user = User.objects.create_user(username=username, password=password)
+		user.save()
 
-		name_user = fake.name()
-		u = User(name=name_user)
-		u.save()
+		v = Visitor(bio=bio, user=user)
+		v.save()
+
+		name_author = fake.name()
+		t = Author(name=name_author, user=user)
+		t.save()
 
 		article_text = fake.text()
 		title_text = fake.text()
 		pub_date= fake.date()
-		# author_article = t
-		a = Article(article_text=article_text,title_text=title_text,pub_date=pub_date,author_article=t)
+		author_article = t
+		a = Article(article_text=article_text,title_text=title_text,pub_date=pub_date,
+			author_article=author_article)
 		a.save()
 
 		comment_text = fake.text()
-		# user_comment = u
-		# article_comment = a
-		c = Comment(comment_text=comment_text, user_comment=u, article_comment = a)
+		pub_date = fake.date()
+		visitor_comment = v
+		article_comment = a
+		c = Comment(comment_text=comment_text, pub_date=pub_date, 
+			visitor_comment=visitor_comment, article_comment=article_comment)
 		c.save()
-	

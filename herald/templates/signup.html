@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Signup</title>
+</head>
+<body>
+	<h1>Signup</h1>
+	<form method="POST" action="{% url 'signup' %}">
+		{% csrf_token %}
+		<label>Username:</label><br>
+		<input type="text" name="username"><br>
+		<label>Password:</label><br>
+		<input type="password" name="password"><br>
+		<label>Bio:</label>
+		<input type="textarea" name="bio"><br>
+		<input type="submit" name="Add">
+	</form>
+</body>
+</html>
