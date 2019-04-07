@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>List of articles</title>
+</head>
+<body>
+	<h1>List of articles</h1>
+<!-- 		article_text = models.CharField(max_length=200)
+	title_text = models.CharField(max_length=50)
+	pub_date = models.DateTimeField('date published')
+	author_article = models.ForeignKey(Author, on_delete=models.CASCADE)
+ -->
+	<div> 
+		<table style="text-align: left";>
+  		<tr>
+    		<th width="50%">Article</th>
+    		<th width="50%">Publishing Date</th> 
+  		</tr>
+  			{% for article in articles %}
+  			<tr>
+			    <td  width="60%"><a href="{% url 'articledetail' article.id %}">{{article.article_text}}</a></td>
+    			<td width="50%">{{article.pub_date}}</td>
+    		</tr> 
+			{% endfor %}
+		</table>
+	</div>
+	<!-- <form action="{% url " -->
+</body>
+</html>

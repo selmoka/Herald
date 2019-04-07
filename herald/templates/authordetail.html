@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Author's Articles</title>
+</head>
+<body>
+	<h1>{{authorname}} Published Articles:</h1>
+<div> 
+		<table style="text-align: left";>
+  		<tr>
+    		<th width="50%">Article</th>
+    		<th width="50%">Publishing Date</th> 
+  		</tr>
+  			{% for article in articles %}
+  			<tr>
+			    <td  width="60%"><a href="{% url 'articledetail' article.id %}">{{article.article_text}}</a></td>
+    			<td width="50%">{{article.pub_date}}</td>
+    		</tr> 
+			{% endfor %}
+		</table>
+	</div>
+	</body>
+</html>
